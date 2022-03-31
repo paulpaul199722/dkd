@@ -1,4 +1,5 @@
 {
+  "homepage": "https://gradguynft.com",
   "name": "candy-machine-mint",
   "version": "0.2.0",
   "private": true,
@@ -17,6 +18,7 @@
     "@solana/wallet-adapter-react-ui": "^0.6.1",
     "@solana/wallet-adapter-wallets": "^0.11.3",
     "@solana/web3.js": "^1.33.0",
+    "gh-pages": "^3.2.3",
     "mime": "^3.0.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
@@ -33,8 +35,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy:gh": "gh-pages -d ./build/ --repo https://github.com/pit-v/metaplex -t true --branch gh-pages-3",
-    "deploy": "cross-env ASSET_PREFIX=/metaplex/ yarn build && yarn deploy:gh"
+    "deploy":"npm run build && gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -55,14 +56,14 @@
     ]
   },
   "devDependencies": {
-    "@types/styled-components": "^5.1.14",
+    "@testing-library/dom": "^7.21.4",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "@types/jest": "^26.0.15",
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
-    "@testing-library/dom": "^7.21.4",
-    "@types/react-dom": "^17.0.0"
+    "@types/react-dom": "^17.0.0",
+    "@types/styled-components": "^5.1.14"
   }
 }
