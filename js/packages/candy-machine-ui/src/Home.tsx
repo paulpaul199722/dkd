@@ -32,6 +32,7 @@ const ConnectButton = styled(WalletDialogButton)`
   color: white;
   font-size: 16px;
   font-weight: bold;
+  fontfamily: 'VT323';
 `;
 
 const MintContainer = styled.div``; // add your owns styles here
@@ -292,14 +293,18 @@ const Home = (props: HomeProps) => {
   ]);
 
   return (
-    <Container style={{ marginTop: 100 }}>
-      <Container maxWidth="xs" style={{ position: 'relative' }}>
+    <Container style={{ marginTop: 100, fontFamily: 'VT323' }}>
+      <Container
+        maxWidth="xs"
+        style={{ position: 'relative', fontFamily: 'VT323' }}
+      >
         <Paper
           style={{
             padding: 24,
             paddingBottom: 10,
             backgroundColor: '#151A1F',
             borderRadius: 6,
+            fontFamily: 'VT323',
           }}
         >
           {!wallet.connected ? (
@@ -314,7 +319,14 @@ const Home = (props: HomeProps) => {
                   wrap="nowrap"
                 >
                   <Grid item xs={3}>
-                    <Typography variant="body2" color="textSecondary">
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      style={{
+                        fontFamily: 'VT323',
+                        fontSize: 16,
+                      }}
+                    >
                       Remaining
                     </Typography>
                     <Typography
@@ -322,13 +334,21 @@ const Home = (props: HomeProps) => {
                       color="textPrimary"
                       style={{
                         fontWeight: 'bold',
+                        fontFamily: 'VT323',
                       }}
                     >
-                      {`${itemsRemaining}`}
+                      {`${itemsRemaining}/9999`}
                     </Typography>
                   </Grid>
                   <Grid item xs={4}>
-                    <Typography variant="body2" color="textSecondary">
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      style={{
+                        fontFamily: 'VT323',
+                        fontSize: 16,
+                      }}
+                    >
                       {isWhitelistUser && discountPrice
                         ? 'Discount Price'
                         : 'Price'}
@@ -336,7 +356,7 @@ const Home = (props: HomeProps) => {
                     <Typography
                       variant="h6"
                       color="textPrimary"
-                      style={{ fontWeight: 'bold' }}
+                      style={{ fontWeight: 'bold', fontFamily: 'VT323' }}
                     >
                       {isWhitelistUser && discountPrice
                         ? `◎ ${formatNumber.asNumber(discountPrice)}`
@@ -351,7 +371,10 @@ const Home = (props: HomeProps) => {
                         <MintCountdown
                           key="endSettings"
                           date={getCountdownDate(candyMachine)}
-                          style={{ justifyContent: 'flex-end' }}
+                          style={{
+                            justifyContent: 'flex-end',
+                            fontFamily: 'VT323',
+                          }}
                           status="COMPLETED"
                           onComplete={toggleMintButton}
                         />
@@ -359,7 +382,7 @@ const Home = (props: HomeProps) => {
                           variant="caption"
                           align="center"
                           display="block"
-                          style={{ fontWeight: 'bold' }}
+                          style={{ fontWeight: 'bold', fontFamily: 'VT323' }}
                         >
                           TO END OF MINT
                         </Typography>
@@ -369,7 +392,10 @@ const Home = (props: HomeProps) => {
                         <MintCountdown
                           key="goLive"
                           date={getCountdownDate(candyMachine)}
-                          style={{ justifyContent: 'flex-end' }}
+                          style={{
+                            justifyContent: 'flex-end',
+                            fontFamily: 'VT323',
+                          }}
                           status={
                             candyMachine?.state?.isSoldOut ||
                             (endDate && Date.now() > endDate.getTime())
@@ -388,7 +414,10 @@ const Home = (props: HomeProps) => {
                               variant="caption"
                               align="center"
                               display="block"
-                              style={{ fontWeight: 'bold' }}
+                              style={{
+                                fontWeight: 'bold',
+                                fontFamily: 'VT323',
+                              }}
                             >
                               UNTIL PUBLIC MINT
                             </Typography>
@@ -502,9 +531,14 @@ const Home = (props: HomeProps) => {
             variant="caption"
             align="center"
             display="block"
-            style={{ marginTop: 7, color: 'grey' }}
+            style={{
+              marginTop: 7,
+              color: 'grey',
+              fontSize: 16,
+              fontFamily: 'VT323',
+            }}
           >
-            Powered by METAPLEX
+            Power by Metaplex | DogeKingdom Editation
           </Typography>
         </Paper>
       </Container>
