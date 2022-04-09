@@ -330,10 +330,14 @@ const Home = (props: HomeProps) => {
             paddingBottom: 10,
             backgroundColor: '#151A1F',
             borderRadius: 6,
+            fontFamily: 'VT323',
+            fontSize: '1.5rem',
           }}
         >
           {!wallet.connected ? (
-            <ConnectButton>Connect Wallet</ConnectButton>
+            <ConnectButton style={{ fontFamily: 'VT323' }}>
+              Connect Wallet
+            </ConnectButton>
           ) : (
             <>
               {candyMachine && (
@@ -344,7 +348,11 @@ const Home = (props: HomeProps) => {
                   wrap="nowrap"
                 >
                   <Grid item xs={3}>
-                    <Typography variant="body2" color="textSecondary">
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      style={{ fontFamily: 'VT323', fontSize: 18 }}
+                    >
                       Remaining
                     </Typography>
                     <Typography
@@ -352,13 +360,19 @@ const Home = (props: HomeProps) => {
                       color="textPrimary"
                       style={{
                         fontWeight: 'bold',
+                        fontFamily: 'VT323',
+                        fontSize: '1.5rem',
                       }}
                     >
-                      {`${itemsRemaining}`}
+                      {`${itemsRemaining}/6969`}
                     </Typography>
                   </Grid>
                   <Grid item xs={4}>
-                    <Typography variant="body2" color="textSecondary">
+                    <Typography
+                      style={{ fontFamily: 'VT323', fontSize: '1.2rem' }}
+                      variant="body2"
+                      color="textSecondary"
+                    >
                       {isWhitelistUser && discountPrice
                         ? 'Discount Price'
                         : 'Price'}
@@ -366,7 +380,11 @@ const Home = (props: HomeProps) => {
                     <Typography
                       variant="h6"
                       color="textPrimary"
-                      style={{ fontWeight: 'bold' }}
+                      style={{
+                        fontWeight: 'bold',
+                        fontFamily: 'VT323',
+                        fontSize: '1.5rem',
+                      }}
                     >
                       {isWhitelistUser && discountPrice
                         ? `◎ ${formatNumber.asNumber(discountPrice)}`
@@ -389,7 +407,7 @@ const Home = (props: HomeProps) => {
                           variant="caption"
                           align="center"
                           display="block"
-                          style={{ fontWeight: 'bold' }}
+                          style={{ fontWeight: 'bold', fontFamily: 'VT323' }}
                         >
                           TO END OF MINT
                         </Typography>
@@ -418,7 +436,10 @@ const Home = (props: HomeProps) => {
                               variant="caption"
                               align="center"
                               display="block"
-                              style={{ fontWeight: 'bold' }}
+                              style={{
+                                fontWeight: 'bold',
+                                fontFamily: 'VT323',
+                              }}
                             >
                               UNTIL PUBLIC MINT
                             </Typography>
@@ -532,9 +553,14 @@ const Home = (props: HomeProps) => {
             variant="caption"
             align="center"
             display="block"
-            style={{ marginTop: 7, color: 'grey' }}
+            style={{
+              marginTop: 7,
+              color: 'grey',
+              fontFamily: 'VT323',
+              fontSize: '1rem',
+            }}
           >
-            Powered by METAPLEX
+            Powered by METAPLEX | DogeKingdom Edition
           </Typography>
         </Paper>
       </Container>
