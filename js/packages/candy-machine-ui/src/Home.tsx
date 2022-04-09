@@ -32,7 +32,6 @@ const ConnectButton = styled(WalletDialogButton)`
   color: white;
   font-size: 16px;
   font-weight: bold;
-  fontfamily: 'VT323';
 `;
 
 const MintContainer = styled.div``; // add your owns styles here
@@ -173,11 +172,41 @@ const Home = (props: HomeProps) => {
         setIsPresale((cndy.state.isPresale = presale));
         setCandyMachine(cndy);
       } catch (e) {
-        console.log('There was a problem fetching Candy Machine state');
+        if (e instanceof Error) {
+          if (e.message === `Account does not exist ${props.candyMachineId}`) {
+            setAlertState({
+              open: true,
+              message: `Couldn't fetch candy machine state from candy machine with address: ${props.candyMachineId}, using rpc: ${props.rpcHost}! You probably typed the REACT_APP_CANDY_MACHINE_ID value in wrong in your .env file, or you are using the wrong RPC!`,
+              severity: 'error',
+              noHide: true,
+            });
+          } else if (e.message.startsWith('failed to get info about account')) {
+            setAlertState({
+              open: true,
+              message: `Couldn't fetch candy machine state with rpc: ${props.rpcHost}! This probably means you have an issue with the REACT_APP_SOLANA_RPC_HOST value in your .env file, or you are not using a custom RPC!`,
+              severity: 'error',
+              noHide: true,
+            });
+          }
+        } else {
+          setAlertState({
+            open: true,
+            message: `${e}`,
+            severity: 'error',
+            noHide: true,
+          });
+        }
         console.log(e);
       }
+    } else {
+      setAlertState({
+        open: true,
+        message: `Your REACT_APP_CANDY_MACHINE_ID value in the .env file doesn't look right! Make sure you enter it in as plain base-58 address!`,
+        severity: 'error',
+        noHide: true,
+      });
     }
-  }, [anchorWallet, props.candyMachineId, props.connection]);
+  }, [anchorWallet, props.candyMachineId, props.connection, props.rpcHost]);
 
   const onMint = async (
     beforeTransactions: Transaction[] = [],
@@ -293,18 +322,14 @@ const Home = (props: HomeProps) => {
   ]);
 
   return (
-    <Container style={{ marginTop: 100, fontFamily: 'VT323' }}>
-      <Container
-        maxWidth="xs"
-        style={{ position: 'relative', fontFamily: 'VT323' }}
-      >
+    <Container style={{ marginTop: 100 }}>
+      <Container maxWidth="xs" style={{ position: 'relative' }}>
         <Paper
           style={{
             padding: 24,
             paddingBottom: 10,
             backgroundColor: '#151A1F',
             borderRadius: 6,
-            fontFamily: 'VT323',
           }}
         >
           {!wallet.connected ? (
@@ -319,14 +344,7 @@ const Home = (props: HomeProps) => {
                   wrap="nowrap"
                 >
                   <Grid item xs={3}>
-                    <Typography
-                      variant="body2"
-                      color="textSecondary"
-                      style={{
-                        fontFamily: 'VT323',
-                        fontSize: 16,
-                      }}
-                    >
+                    <Typography variant="body2" color="textSecondary">
                       Remaining
                     </Typography>
                     <Typography
@@ -334,21 +352,13 @@ const Home = (props: HomeProps) => {
                       color="textPrimary"
                       style={{
                         fontWeight: 'bold',
-                        fontFamily: 'VT323',
                       }}
                     >
-                      {`${itemsRemaining}/9999`}
+                      {`${itemsRemaining}`}
                     </Typography>
                   </Grid>
                   <Grid item xs={4}>
-                    <Typography
-                      variant="body2"
-                      color="textSecondary"
-                      style={{
-                        fontFamily: 'VT323',
-                        fontSize: 16,
-                      }}
-                    >
+                    <Typography variant="body2" color="textSecondary">
                       {isWhitelistUser && discountPrice
                         ? 'Discount Price'
                         : 'Price'}
@@ -356,7 +366,7 @@ const Home = (props: HomeProps) => {
                     <Typography
                       variant="h6"
                       color="textPrimary"
-                      style={{ fontWeight: 'bold', fontFamily: 'VT323' }}
+                      style={{ fontWeight: 'bold' }}
                     >
                       {isWhitelistUser && discountPrice
                         ? `◎ ${formatNumber.asNumber(discountPrice)}`
@@ -371,10 +381,7 @@ const Home = (props: HomeProps) => {
                         <MintCountdown
                           key="endSettings"
                           date={getCountdownDate(candyMachine)}
-                          style={{
-                            justifyContent: 'flex-end',
-                            fontFamily: 'VT323',
-                          }}
+                          style={{ justifyContent: 'flex-end' }}
                           status="COMPLETED"
                           onComplete={toggleMintButton}
                         />
@@ -382,7 +389,7 @@ const Home = (props: HomeProps) => {
                           variant="caption"
                           align="center"
                           display="block"
-                          style={{ fontWeight: 'bold', fontFamily: 'VT323' }}
+                          style={{ fontWeight: 'bold' }}
                         >
                           TO END OF MINT
                         </Typography>
@@ -392,10 +399,7 @@ const Home = (props: HomeProps) => {
                         <MintCountdown
                           key="goLive"
                           date={getCountdownDate(candyMachine)}
-                          style={{
-                            justifyContent: 'flex-end',
-                            fontFamily: 'VT323',
-                          }}
+                          style={{ justifyContent: 'flex-end' }}
                           status={
                             candyMachine?.state?.isSoldOut ||
                             (endDate && Date.now() > endDate.getTime())
@@ -414,10 +418,7 @@ const Home = (props: HomeProps) => {
                               variant="caption"
                               align="center"
                               display="block"
-                              style={{
-                                fontWeight: 'bold',
-                                fontFamily: 'VT323',
-                              }}
+                              style={{ fontWeight: 'bold' }}
                             >
                               UNTIL PUBLIC MINT
                             </Typography>
@@ -531,21 +532,16 @@ const Home = (props: HomeProps) => {
             variant="caption"
             align="center"
             display="block"
-            style={{
-              marginTop: 7,
-              color: 'grey',
-              fontSize: 16,
-              fontFamily: 'VT323',
-            }}
+            style={{ marginTop: 7, color: 'grey' }}
           >
-            Power by Metaplex | DogeKingdom Editation
+            Powered by METAPLEX
           </Typography>
         </Paper>
       </Container>
 
       <Snackbar
         open={alertState.open}
-        autoHideDuration={6000}
+        autoHideDuration={alertState.noHide ? null : 6000}
         onClose={() => setAlertState({ ...alertState, open: false })}
       >
         <Alert
