@@ -347,11 +347,11 @@ const Home = (props: HomeProps) => {
                   justifyContent="center"
                   wrap="nowrap"
                 >
-                  <Grid item xs={3}>
+                  <Grid item xs={4}>
                     <Typography
                       variant="body2"
                       color="textSecondary"
-                      style={{ fontFamily: 'VT323', fontSize: 18 }}
+                      style={{ fontFamily: 'VT323', fontSize: '1.1rem' }}
                     >
                       Remaining
                     </Typography>
@@ -367,9 +367,9 @@ const Home = (props: HomeProps) => {
                       {`${itemsRemaining}/6969`}
                     </Typography>
                   </Grid>
-                  <Grid item xs={4}>
+                  <Grid item xs={6}>
                     <Typography
-                      style={{ fontFamily: 'VT323', fontSize: '1.2rem' }}
+                      style={{ fontFamily: 'VT323', fontSize: '1.1rem' }}
                       variant="body2"
                       color="textSecondary"
                     >
@@ -560,7 +560,7 @@ const Home = (props: HomeProps) => {
               fontSize: '1rem',
             }}
           >
-            Powered by METAPLEX | DogeKingdom Edition
+            METAPLEX | DogeKingdom Edition
           </Typography>
         </Paper>
       </Container>
